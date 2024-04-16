@@ -1,17 +1,19 @@
 package com.pedro;
 
 
+import com.pedro.config.ConfigurationProgram;
 import com.pedro.controller.DirectoryController;
+import com.pedro.controller.FileController;
 
 
 public class Main {
-    private static DirectoryController directoryController;
+
+    private ConfigurationProgram configurationProgram;
     public static void main(String[] args) {
-        directoryController = new DirectoryController();
-
-        directoryController.createDirectory();
-
-
+        ConfigurationProgram config = new ConfigurationProgram();
+        config.setDirectoryController(new DirectoryController());
+        config.setFileController(new FileController());
+        config.startProgram();
 
     }
 }

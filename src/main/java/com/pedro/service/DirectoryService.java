@@ -1,5 +1,7 @@
 package com.pedro.service;
 
+import com.pedro.model.DirectoryModel;
+
 import javax.swing.filechooser.FileSystemView;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,13 +10,15 @@ import java.nio.file.Paths;
 
 public class DirectoryService {
 
-    public static String pathFilesInDesktop() {
-        FileSystemView path = FileSystemView.getFileSystemView();
-        return path.getHomeDirectory().getPath() + "\\Comprovantes\\Renomeados\\";
-    }
+    private DirectoryModel directoryModel = new DirectoryModel();
+
+
+    public String pathToSaveRenameds = directoryModel.pathToSaveRenameds();
+    public String pathMainFolder = directoryModel.pathMainFolderDesktop();
+
 
     public void createIfNotExist() {
-        Path path = Paths.get(pathFilesInDesktop());
+        Path path = Paths.get(pathToSaveRenameds);
 
         if (!directoryExists(path)) {
             try {

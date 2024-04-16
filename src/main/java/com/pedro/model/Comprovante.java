@@ -1,6 +1,6 @@
-package com.pedro.entity;
+package com.pedro.model;
 
-public class Comprovante {
+public abstract class Comprovante {
     private String destinatario;
     private String valor;
     private String dataPagamento;
@@ -33,5 +33,13 @@ public class Comprovante {
 
     public void setDataPagamento(String dataPagamento) {
         this.dataPagamento = dataPagamento;
+    }
+
+    public abstract void splitLines(String lines);
+    @Override
+    public String toString() {
+        return dataPagamento + " R$ "
+                + valor + " - "
+                + destinatario.toUpperCase().trim();
     }
 }

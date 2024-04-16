@@ -4,10 +4,18 @@ import com.pedro.service.DirectoryService;
 
 public class DirectoryController {
 
-    private DirectoryService directoryService;
+    private DirectoryService directoryService = new DirectoryService();
 
-    public DirectoryController() {
-        this.directoryService = new DirectoryService();
+
+    public DirectoryController () {}
+
+
+    public DirectoryController(DirectoryService directoryService) {
+        this.directoryService = directoryService;
+    }
+
+    public String getPathFiles() {
+        return directoryService.pathMainFolder;
     }
 
     public void createDirectory() {
