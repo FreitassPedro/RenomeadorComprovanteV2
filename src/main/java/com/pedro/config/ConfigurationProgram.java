@@ -19,6 +19,7 @@ public class ConfigurationProgram {
     public void startProgram() {
         directoryController.createDirectory();
         fileController.prepareFilesToRename();
+        fileController.startRenameWithData();
     }
 }
 

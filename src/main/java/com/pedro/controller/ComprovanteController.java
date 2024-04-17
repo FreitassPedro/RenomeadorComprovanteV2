@@ -8,18 +8,21 @@ public class ComprovanteController {
 
 
     private ComprovanteService comprovanteService;
+    private FileController fileController = new FileController();
 
+
+    public ComprovanteController(FileController fileController) {
+        this.fileController = fileController;
+    }
 
     public ComprovanteController(ComprovanteService comprovanteService) {
         this.comprovanteService = comprovanteService;
     }
 
     public String getText(File file) {
-        return comprovanteService.extractTextFromPDF(file);
+        return fileController.;
     }
 
-    public int getTypeUsingText(File file) {
-        String text = getText(file);
-        return comprovanteService.identifyType(text);
-    }
+
+
 }

@@ -1,33 +1,47 @@
 package com.pedro.service;
 
-import com.pedro.controller.DirectoryController;
-import org.apache.pdfbox.Loader;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.text.PDFTextStripper;
+import com.pedro.model.Comprovante;
+import com.pedro.service.Types.ComprovanteOne;
+import com.pedro.service.Types.ComprovanteThree;
+import com.pedro.service.Types.ComprovanteTwo;
 
-import java.io.File;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ComprovanteService {
-    private DirectoryController directoryController;
+    private String text;
+    private int type;
 
-    public String extractTextFromPDF(File file) {
-        try {
-            PDDocument pdfLoad = Loader.loadPDF(file);
-            PDFTextStripper textStripper = new PDFTextStripper();
+    public List<String> listOfLines = new ArrayList<>();
 
-            return textStripper.getText(pdfLoad);
-        } catch (IOException e) {
-            System.err.println("Error collecting text");
-        }
-        return null;
+    public ComprovanteService(String text, int type) {
+        this.text = text;
+        this.type = type;
     }
 
+    public void splitLines() {
+        String[] lines = text.split("\\r?\\n");
+        for (String line : lines) {
+            if (!line.trim().isEmpty()) {
+                listOfLines.add(line);
+            }
+        }
+    }
 
-    public int identifyType(String text) {
-        if (text.startsWith("Ass")) return 1;
-        if (text.startsWith("Comprovante de Pagamento")) return 2;
-        return 3;
+    public Comprovante startCollectDatas() {
+        switch (type) {
+            case 1:
+                Comprovante c1 = new ComprovanteOne();
+                return c1;
+
+            case 2:
+                Comprovante c2 = new ComprovanteTwo();
+                return c2;
+            case 3:
+                Comprovante c3 = new ComprovanteThree();
+                return c3;
+        }
+        return null;
     }
 }
 

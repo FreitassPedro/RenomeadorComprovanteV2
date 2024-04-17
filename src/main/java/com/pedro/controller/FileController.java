@@ -10,7 +10,13 @@ public class FileController {
         this.fileService = fileService;
     }
 
-    public int prepareFilesToRename() {
-        return fileService.prepareFileToRename();
+    public void prepareFilesToRename() {
+        fileService.getFile(false);
     }
+
+    public void startRenameWithData() {
+        fileService.getFile(true);
+    }
+
+
 }

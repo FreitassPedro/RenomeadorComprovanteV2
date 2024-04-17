@@ -2,7 +2,6 @@ package com.pedro.service;
 
 import com.pedro.model.DirectoryModel;
 
-import javax.swing.filechooser.FileSystemView;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
