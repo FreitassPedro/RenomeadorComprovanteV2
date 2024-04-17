@@ -1,9 +1,13 @@
 package com.pedro;
 
-
 import com.pedro.config.ConfigurationProgram;
 import com.pedro.controller.DirectoryController;
 import com.pedro.controller.FileController;
+/*
+
+    @author: Pedro freitas
+
+*/
 
 
 public class Main {

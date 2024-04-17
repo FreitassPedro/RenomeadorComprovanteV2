@@ -31,14 +31,14 @@ public class ComprovanteService {
     public Comprovante startCollectDatas() {
         switch (type) {
             case 1:
-                Comprovante c1 = new ComprovanteOne();
+                Comprovante c1 = new ComprovanteOne(listOfLines);
                 return c1;
 
             case 2:
                 Comprovante c2 = new ComprovanteTwo();
                 return c2;
             case 3:
-                Comprovante c3 = new ComprovanteThree();
+                Comprovante c3 = new ComprovanteThree(listOfLines);
                 return c3;
         }
         return null;

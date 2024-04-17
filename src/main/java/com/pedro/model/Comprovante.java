@@ -1,5 +1,8 @@
 package com.pedro.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Comprovante {
     private String destinatario;
     private String valor;
@@ -40,6 +43,7 @@ public class Comprovante {
     public String toString() {
         return dataPagamento + " R$ "
                 + valor + " - "
-                + destinatario.toUpperCase().trim();
+                + destinatario.toUpperCase().trim()
+                + ".pdf";
     }
 }

@@ -10,6 +10,10 @@ import static com.pedro.model.Types.ProofTypeOne.*;
 public class ComprovanteOne extends Comprovante {
     private List<String> lines;
 
+    public ComprovanteOne(List<String> lines) {
+        this.lines = lines;
+    }
+
     public Comprovante collectData() {
         String nomeDestinatarioAlt = "";
         for (String line : this.lines) {

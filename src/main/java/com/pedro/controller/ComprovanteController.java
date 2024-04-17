@@ -19,9 +19,9 @@ public class ComprovanteController {
         this.comprovanteService = comprovanteService;
     }
 
-    public String getText(File file) {
-        return fileController.;
-    }
+    /*public String getText(File file) {
+
+    }*/
 
 
 

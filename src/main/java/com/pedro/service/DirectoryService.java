@@ -2,6 +2,7 @@ package com.pedro.service;
 
 import com.pedro.model.DirectoryModel;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,20 +17,25 @@ public class DirectoryService {
     public String pathMainFolder = directoryModel.pathMainFolderDesktop();
 
 
-    public void createIfNotExist() {
+    private boolean createIfNotExist() {
         Path path = Paths.get(pathToSaveRenameds);
-
-        if (!directoryExists(path)) {
+        File directoryInDesktop = new File(pathToSaveRenameds);
+        if (!directoryInDesktop.exists()) {
             try {
                 Files.createDirectories(path);
+                System.out.println("Repositorio Criado! " + path);
+                return false;
             } catch (IOException e) {
                 System.err.println("Error creating directory: " + e.getMessage());
+                return false;
             }
         }
+        return true;
     }
 
-    private static boolean directoryExists(Path path) {
-        return Files.exists(path);
+
+    public boolean directoryExists() {
+          return createIfNotExist();
     }
 
 }

@@ -18,7 +18,7 @@ public class DirectoryController {
         return directoryService.pathMainFolder;
     }
 
-    public void createDirectory() {
-       directoryService.createIfNotExist();
+    public boolean createDirectory() {
+       return directoryService.directoryExists();
     }
 }

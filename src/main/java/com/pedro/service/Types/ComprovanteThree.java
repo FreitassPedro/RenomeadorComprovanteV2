@@ -3,17 +3,27 @@ package com.pedro.service.Types;
 
 import com.pedro.model.Comprovante;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.pedro.model.Types.ProofTypeOne.*;
 
+//Comprovante PIXs
 public class ComprovanteThree extends Comprovante {
     private List<String> lines;
+
+    public ComprovanteThree(List<String> lines) {
+        this.lines = lines;
+        collectData();
+    }
 
     public Comprovante collectData() {
         String nomePagadorPara = "Nome do pagador:";
         String nomeDestinatarioDe = "Nome do destinatário:";
         String dataPagamento = "";
+
+        String[] chavesDatas = {"Realizado em:"};
+        String[] chavesPagamentos = {"Valor:"};
 
         boolean ehPagamento = false;
             for (String line : this.lines) {
@@ -51,4 +61,6 @@ public class ComprovanteThree extends Comprovante {
         }
         return new Comprovante(getDestinatario(), getValor(), getDataPagamento());
     }
+
+
 }
