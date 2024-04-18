@@ -9,6 +9,7 @@ import static com.pedro.model.Types.ProofTypeOne.*;
 
 public class ComprovanteOne extends Comprovante {
     private List<String> lines;
+    private String nomeDestinatarioAlt = "";
 
     public ComprovanteOne(List<String> lines) {
         this.lines = lines;
@@ -16,38 +17,61 @@ public class ComprovanteOne extends Comprovante {
 
     public Comprovante collectData() {
         String nomeDestinatarioAlt = "";
-        for (String line : this.lines) {
+        for (String line : lines) {
 
-            String[] fields = line.split(": ");
-            String prefixo = fields[0] + ":";
 
-            for (String chave : chavesDatas) {
-                if (prefixo.equals(chave)) {
-                    setDataPagamento(fields[1].replace("/", "."));
-                    break;
-                }
-            }
-            for (String chave : chavesPagamentos) {
-                for (String chaveAlt : chavesPagamentosAlt) {
-                    if (prefixo.equals(chave)) {
-                        setDestinatario(fields[1]);
-                        break;
-                    }
-                    if (prefixo.equals(chaveAlt)) {
-                        nomeDestinatarioAlt = fields[1];
-                    }
-                }
-                if ("".equals(getDestinatario())) {
-                    setDestinatario(nomeDestinatarioAlt);
-                }
-            }
-            for (String chave : chavesValores) {
-                if (prefixo.equals(chave)) {
-                    setValor(fields[1]);
-                    break;
-                }
-            }
+            String[] lineSplited = line.split(": ");
+            String prefixo = lineSplited[0] + ":";
+
+            if (findDestinatario(lineSplited[1], prefixo)) continue;
+            if (findDataPagamento(lineSplited[1], prefixo)) continue;
+            if (findValor(lineSplited[1], prefixo)) continue;
+
         }
         return new Comprovante(getDestinatario(), getValor(), getDataPagamento());
+    }
+
+    private boolean findValor(String pathWithValor, String prefixo) {
+        if (getValor() != null) return true;
+
+        for (String chave : chavesValores) {
+            if (prefixo.equals(chave)) {
+                setValor(pathWithValor);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean findDataPagamento(String partWithData, String prefixo) {
+        if (getDataPagamento() != null) return true;
+        for (String chave : chavesDatas) {
+            if (prefixo.equals(chave)) {
+                setDataPagamento(partWithData.replace("/", "."));
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    private boolean findDestinatario(String partWithDestinatario, String prefixo) {
+        for (String chave : chavesPagamentos) {
+            for (String chaveAlt : chavesPagamentosAlt) {
+                if (prefixo.equals(chave)) {
+                    setDestinatario(partWithDestinatario);
+                    return true;
+                }
+                if (prefixo.equals(chaveAlt)) {
+                    nomeDestinatarioAlt = partWithDestinatario;
+                    return true;
+                }
+            }
+            if ("".equals(getDestinatario())) {
+                setDestinatario(nomeDestinatarioAlt);
+                return true;
+            }
+        }
+        return false;
     }
 }

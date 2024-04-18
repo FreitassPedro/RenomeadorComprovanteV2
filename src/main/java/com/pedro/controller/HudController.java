@@ -1,6 +1,6 @@
-package com.pedro.hud;
+package com.pedro.controller;
 
-import com.pedro.controller.FileController;
+import com.pedro.service.HudService;
 
 import java.util.List;
 

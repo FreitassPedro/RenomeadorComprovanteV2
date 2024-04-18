@@ -35,7 +35,7 @@ public class ComprovanteService {
                 return c1;
 
             case 2:
-                Comprovante c2 = new ComprovanteTwo();
+                Comprovante c2 = new ComprovanteTwo(listOfLines);
                 return c2;
             case 3:
                 Comprovante c3 = new ComprovanteThree(listOfLines);

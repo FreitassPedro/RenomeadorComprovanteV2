@@ -9,6 +9,4 @@ public class ProofTypeOne {
     public static final String[] chavesPagamentosAlt = {"Motivo Transferência:", "Descrição de Pagamento:", "Descrição do Pagamento:", "Tipo de Documento:"};
 
 
-
-
 }

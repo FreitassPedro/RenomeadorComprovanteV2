@@ -1,7 +1,5 @@
-package com.pedro.hud;
+package com.pedro.service;
 
-
-import com.pedro.service.FileService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,16 +7,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class HudService {
-
-    private FileService fileService = new FileService();
-
     public List<String> listOfAllRenameds = new ArrayList<>();
 
     public HudService() {}
-
-    public HudService(FileService fileService) {
-        this.fileService = fileService;
-    }
 
     public int askIfCanStart() {
         return JOptionPane.showConfirmDialog(null, "Todos os arquivos .pdf serão alterados\n "
@@ -57,8 +48,11 @@ public class HudService {
             textArea.append(fileRenamed+"\n");
         }
 
-        textArea.append("Finalizado com êxito! "
-                + "\nFeche esta aba para encerrar.");
+
+        textArea.append("\n---------------------------------------------------------------------\n"
+                + "Finalizado com êxito! "
+                + "\nFeche esta aba para encerrar."
+                + "\n---------------------------------------------------------------------");
     }
 
     public List<String> getListOfAllRenameds() {

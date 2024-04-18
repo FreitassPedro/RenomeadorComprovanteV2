@@ -2,7 +2,7 @@ package com.pedro;
 
 import com.pedro.config.ConfigurationProgram;
 import com.pedro.controller.DirectoryController;
-import com.pedro.hud.HudController;
+import com.pedro.controller.HudController;
 /*
 
     @author: Pedro freitas

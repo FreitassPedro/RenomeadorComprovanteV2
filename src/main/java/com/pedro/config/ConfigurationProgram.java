@@ -1,8 +1,7 @@
 package com.pedro.config;
 
 import com.pedro.controller.DirectoryController;
-import com.pedro.controller.FileController;
-import com.pedro.hud.HudController;
+import com.pedro.controller.HudController;
 
 public class ConfigurationProgram {
     private DirectoryController directoryController;
