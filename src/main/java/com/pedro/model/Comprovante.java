@@ -1,8 +1,5 @@
 package com.pedro.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Comprovante {
     private String destinatario;
     private String valor;

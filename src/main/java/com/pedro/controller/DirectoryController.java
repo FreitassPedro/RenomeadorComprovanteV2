@@ -6,9 +6,7 @@ public class DirectoryController {
 
     private DirectoryService directoryService = new DirectoryService();
 
-
     public DirectoryController () {}
-
 
     public DirectoryController(DirectoryService directoryService) {
         this.directoryService = directoryService;
@@ -20,5 +18,8 @@ public class DirectoryController {
 
     public boolean createDirectory() {
        return directoryService.directoryExists();
+    }
+    public void openFolder() {
+        directoryService.openCreatedFolder();
     }
 }

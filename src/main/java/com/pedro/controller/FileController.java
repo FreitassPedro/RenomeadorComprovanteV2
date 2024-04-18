@@ -2,9 +2,14 @@ package com.pedro.controller;
 
 import com.pedro.service.FileService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FileController {
     private FileService fileService = new FileService();
     public FileController() {}
+
+    public List<String> renamedList = new ArrayList<>();
 
     public FileController(FileService fileService) {
         this.fileService = fileService;
@@ -14,8 +19,8 @@ public class FileController {
         fileService.getFile(false);
     }
 
-    public void startRenameWithData() {
-        fileService.getFile(true);
+    public List<String> startRenameWithData() {
+       return fileService.getFile(true);
     }
 
 

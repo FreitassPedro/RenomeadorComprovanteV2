@@ -2,7 +2,7 @@ package com.pedro;
 
 import com.pedro.config.ConfigurationProgram;
 import com.pedro.controller.DirectoryController;
-import com.pedro.controller.FileController;
+import com.pedro.hud.HudController;
 /*
 
     @author: Pedro freitas
@@ -16,7 +16,7 @@ public class Main {
     public static void main(String[] args) {
         ConfigurationProgram config = new ConfigurationProgram();
         config.setDirectoryController(new DirectoryController());
-        config.setFileController(new FileController());
+        config.setHudController(new HudController());
         config.startProgram();
 
     }

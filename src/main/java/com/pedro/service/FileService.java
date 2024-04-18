@@ -8,19 +8,23 @@ import org.apache.pdfbox.text.PDFTextStripper;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FileService {
 
     private DirectoryService directoryService = new DirectoryService();
 
-    private FileModel fileModel = new FileModel();
     private String getPathToSave = directoryService.pathToSaveRenameds;
     private String getPathMain = directoryService.pathMainFolder;
+
+    private List<String> allSucessRenames = new ArrayList<>();
+
 
     public FileService() {
     }
 
-    public void getFile(boolean isRenamed) {
+    public List<String> getFile(boolean isRenamed) {
         File directoryPath = new File(getPathMain);
         File[] filesList = directoryPath.listFiles();
         int i = 0;
@@ -30,7 +34,7 @@ public class FileService {
                 //Verifica se o arquivo não é uma pasta
                 if (file.isFile() && file.getName().endsWith(".pdf")) {
                     if (isRenamed) {
-                        renameFileToNewDatas(file);
+                        prepareFileToNewData(file);
                     } else {
                         prepareToRenameFile(file, i);
                     }
@@ -38,10 +42,11 @@ public class FileService {
                 }
             }
         }
+        return getAllSucessRenames();
+
     }
 
-
-    private void renameFileToNewDatas(File file) {
+    private void prepareFileToNewData(File file) {
         String text = getTextFromPDF(file);
         int type = identifyType(text);
 
@@ -50,7 +55,6 @@ public class FileService {
         comprovanteService.splitLines();
         var newFile = comprovanteService.startCollectDatas();
         renameUsingNewDatas(file, newFile);
-
     }
 
 
@@ -58,34 +62,9 @@ public class FileService {
         int numberOfRenamed = 0;
             if (renameFileToTemporaryName(file, i)) {
                 numberOfRenamed++;
-
         }
+
         return numberOfRenamed;
-    }
-
-    public String renameUsingNewDatas(File file, Comprovante comprovante) {
-        File finalFile = new File(getPathToSave, comprovante.toString());
-
-        int counter = 0;
-        do {
-            String prefixo = "";
-            if (counter > 0) {
-                prefixo = "(" + counter + ") ";
-            }
-            finalFile = new File(getPathToSave, prefixo + comprovante.toString());
-            counter++;
-        } while (finalFile.exists());
-
-        String message = "";
-        if (file.renameTo(finalFile)) {
-            message = "File sucessful! " + comprovante.toString();
-            System.out.println(message);
-            return message;
-        }
-
-        message = "Error! TODO";
-        System.out.println(message);
-        return message;
     }
 
     public boolean renameFileToTemporaryName(File fileToRename, int counter) {
@@ -93,6 +72,25 @@ public class FileService {
         File fileTemporary = new File(fileToRename.getParent(), fileModel.getTemporaryName(counter));
 
         return fileToRename.renameTo(fileTemporary);
+    }
+
+    public void renameUsingNewDatas(File file, Comprovante comprovante) {
+        File finalFile = new File(getPathToSave, comprovante.toString());
+
+        int avoidDuplicatedFile = 0;
+        do {
+            String prefix = "";
+            if (avoidDuplicatedFile > 0) {
+                prefix = "(" + avoidDuplicatedFile + ") ";
+            }
+            finalFile = new File(getPathToSave, prefix + comprovante);
+            avoidDuplicatedFile++;
+        } while (finalFile.exists());
+
+
+        if (file.renameTo(finalFile)) {
+            allSucessRenames.add("Sucessful! Renamed to " + comprovante);
+        } else { allSucessRenames.add("Something went wrong..." + file.getName()); }
     }
 
     public String getTextFromPDF(File file) {
@@ -113,5 +111,8 @@ public class FileService {
         return 2;
     }
 
+    public List<String> getAllSucessRenames() {
+        return allSucessRenames;
+    }
 }
 

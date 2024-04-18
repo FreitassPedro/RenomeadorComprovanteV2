@@ -1,26 +1,32 @@
 package com.pedro.config;
 
-import com.pedro.controller.ComprovanteController;
 import com.pedro.controller.DirectoryController;
 import com.pedro.controller.FileController;
+import com.pedro.hud.HudController;
 
 public class ConfigurationProgram {
     private DirectoryController directoryController;
-    private FileController fileController;
+    private HudController hudController;
 
-    public void setDirectoryController(DirectoryController directoryController) {
-        this.directoryController = directoryController;
+    public void setHudController(HudController hudController) {
+        this.hudController = hudController;
     }
 
-    public void setFileController(FileController fileController) {
-        this.fileController = fileController;
+    public void setDirectoryController(DirectoryController directoryController) {this.directoryController = directoryController;
+    }
+
+    public ConfigurationProgram() {
     }
 
     public void startProgram() {
-        if (directoryController.createDirectory()) {
-            fileController.prepareFilesToRename();
-            fileController.startRenameWithData();
+        if (hudController.askIfCanStartProgram()) {
+            if (directoryController.createDirectory()) {
+                hudController.startHudProgram();
+
+                directoryController.openFolder();
+            }
         }
+
     }
 }
 
